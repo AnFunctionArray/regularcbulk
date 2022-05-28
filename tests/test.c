@@ -33,7 +33,11 @@ int condtest() {
     return printf("a %d, b %d c %d\n", a || b && 0, b, c);
 }
 
+typedef int ta, tb;
+
 main () {
+    ta ta;
+    printf("%d", 0 ? (9 || 2 + 7) * 7 : (4 && 8) - 8);
     longlong = 18446744073709551615u;
     b = 9UL;
     a = 9UL << 1 + 6;

@@ -1,0 +1,1 @@
+#define __typeof__() int

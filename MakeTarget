@@ -1,0 +1,13 @@
+
+
+SOURCES := $(filter-out traod_decls.pp traod_defs.pp traod_defs_fixed.pp, $(wildcard *.pp))
+OBJECTS := $(patsubst %.pp, %.pp.ll.o, $(SOURCES))
+
+all: $(OBJECTS)
+	/usr/bin/clang $^
+
+%.pp.ll: %.pp
+	./regularc ./regexes/parse.pl ./$< 2> $<.log
+
+%.pp.ll.o: %.pp.ll
+	/usr/local/bin/llc -filetype=obj -o $<.o $<
