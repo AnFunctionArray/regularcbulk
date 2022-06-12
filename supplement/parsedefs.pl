@@ -28,7 +28,7 @@ print "fixing structs...\n";
 $subjectoutter =~ s{\b__attribute__\s*+\((\(([^()]|(?1))*+\))\)
     |\b__declspec(\(([^()]|(?1))*+\))
     |\b(__fastcall|__hidden|__cdecl|__extension__|__inline__|__inline|__userpurge|__usercall
-    |__stdcall|__unaligned|__thiscall)\b
+    |__unaligned|__thiscall)\b
     |\b__asm__\b[^;]*+;
     |\s:\s*+[^\d\W]++\b\s*+(?=\{)
     |\b__spoils<[^<>]*+>

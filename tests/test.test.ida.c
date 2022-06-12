@@ -1,21 +1,19 @@
-    typedef  int LONG64;
+extern int printf(const char *, ...);
 
+int f(int);
+int f(float a) {
+    return printf("f float int -> %f\n", a);
+}
+int f(int,int);
 
-__forceinline
-LONG64
-UnsignedMultiplyExtract128 (
-      LONG64 Multiplier,
-      LONG64 Multiplicand,
-      LONG64  Shift
-    )
+int main() {
+    return f(8) + f(0,8) + f(0.,7);
+}
 
-{
+int f(int a) {
+    return printf("f int -> %d\n", a);
+}
 
-    LONG64 extractedProduct;
-    LONG64 highProduct;
-    LONG64 lowProduct;
-
-    lowProduct = _umul128(Multiplier, Multiplicand, &highProduct);
-    extractedProduct = __shiftright128(lowProduct, highProduct, Shift);
-    return extractedProduct;
+int f(int a, int b) {
+    return printf("f int int -> %d\n", a + b);
 }

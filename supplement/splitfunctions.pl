@@ -23,9 +23,12 @@ open my $fhdecls, '>', $filename or die "error opening $filename: $!";
 
 $declsout;
 
+my %fnnames = {};
+
 while($subjectoutter =~ m{([^{}]*?\b(?<fnname>\w++)\([^{}]*)\n(?<in>\{\n(?s)((?!\n\}\n).)*?\n\}\n(?{
     print $fhdecls $1 . ";\n";
     $filename = $+{fnname} . ".pp";
+    $filename = $filename . "_" . $fnnames{ $filename } if($fnnames{ $filename }++);
     $content = $&;
     print $filename . "\n";
     open my $fh, '>', $filename or die "error opening $filename: $!";
