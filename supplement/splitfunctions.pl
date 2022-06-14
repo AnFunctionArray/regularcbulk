@@ -19,23 +19,32 @@ close $fh;
 
 $filename = $ARGV[1];
 
+$count = $ARGV[2];
+
 open my $fhdecls, '>', $filename or die "error opening $filename: $!";
 
 $declsout;
 
 my %fnnames = {};
 
+my $fncount = 0;
+
 while($subjectoutter =~ m{([^{}]*?\b(?<fnname>\w++)\([^{}]*)\n(?<in>\{\n(?s)((?!\n\}\n).)*?\n\}\n(?{
     print $fhdecls $1 . ";\n";
-    $filename = $+{fnname} . ".pp";
-    $filename = $filename . "_" . $fnnames{ $filename } if($fnnames{ $filename }++);
+    #$filename = $+{fnname} . ".pp";
+    #$filename = $filename . "_" . $fnnames{ $filename } if($fnnames{ $filename }++);
     $content = $&;
-    print $filename . "\n";
-    open my $fh, '>', $filename or die "error opening $filename: $!";
+    print $+{fnname} . "\n";
 
-    print $fh $content;
+    if(not ($fncount % $count)) {
+        close fh if(fh);
+        $filename = $ARGV[0] . "_" . ($fncount / $count) . ".ipp";
+        open fh, '>', $filename or die "error opening $filename: $!";
+    }
 
-    close $fh;
+    print fh $content;
+
+    ++$fncount;
 }))}gsxx){}
 
 =begin
