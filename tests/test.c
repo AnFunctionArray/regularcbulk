@@ -17,7 +17,9 @@ test (int a, int *p) { return printf ("%p %p %p %d\n", &*p, &p[0], *&*(p + 2)=7,
 
 call (int pfun ()) { return (7 + pfun ()); }
 
-notajokenow(struct notajoke{ int n; } n) {
+struct notajoke{ int n; };
+
+notajokenow(struct notajoke n) {
     return printf("%d\n", n.n);
 }
 
